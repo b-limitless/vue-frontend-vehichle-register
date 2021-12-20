@@ -28,7 +28,7 @@
     <div className="col actions">
       <div className="price">$ {{ vehicle.price }}</div>
       <button className="btn btn--primary">Book Now</button>
-      <span >Delete </span>
+      <span @click="$emit('deleteVehicle', vehicle.id)">Delete </span>
       <span @click="$emit('updateOpen', vehicle.id)">Update </span>
     </div>
   </div>

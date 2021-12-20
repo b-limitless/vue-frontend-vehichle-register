@@ -18,15 +18,15 @@
       :vehicles="vehicles.vehicles"
       :models="vehicles.models"
       :brands="vehicles.brands"
+      @deleteVehicle="deleteVehicle"
       @updateOpen="updateOpen"
     />
   </div>
 </template>
-
 <script>
 import ListVehicles from "./index.list";
 import AddVehicle from "./vehicle.add";
-
+import { getError } from "../utils/errors";
 const formModel = {
   title: "",
   price: "",
@@ -47,7 +47,6 @@ const formModel = {
   name: "",
   brandName: "",
 };
-
 export default {
   name: "Home",
   components: {
@@ -69,23 +68,23 @@ export default {
   },
   methods: {
     async fetchVehicles() {
-      const res = await fetch("api/vehicle");
-      const data = await res.json();
-      return data;
+      try {
+        const res = await fetch("api/vehicle");
+        const data = await res.json();
+        return data;
+      } catch (err) {
+        const getEr = getError(err);
+        console.log("http request", getEr);
+      }
     },
     updateOpen(id) {
       this.updateMode = true;
-      console.log("need to update", id);
-      // Find the row by id
-      // console.log(this.vehicles)
       if (typeof id !== undefined) {
         let { vehicles } = this.vehicles;
         let vehicle = vehicles.find((vehicle) => vehicle.id === id);
         this.form = vehicle;
       }
       this.open = !this.open;
-
-      //this.form.title = 35;
     },
     createOpen() {
       this.updateMode = false;
@@ -95,12 +94,10 @@ export default {
       this.open = false;
       this.form = formModel;
     },
-
     async onSubmit(id) {
       let url;
       let method;
       let message;
-
       if (id) {
         url = `api/vehicle/${id}`;
         method = "PUT";
@@ -130,8 +127,27 @@ export default {
           this.errors = errors;
         }
       } catch (err) {
-        // const errors = await err.json();
         return Promise.reject(err);
+      }
+    },
+    async deleteVehicle(id) {
+      if (confirm("Are you sure")) {
+        try {
+          const res = await fetch(`api/vehicle/${id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json",
+            },
+          });
+          if (res.ok) {
+            alert("Vehicel sucessfully deleted");
+            window.location.reload();
+          } else {
+            alert("Cound not delete vehicle");
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
     },
     changeItem(event) {

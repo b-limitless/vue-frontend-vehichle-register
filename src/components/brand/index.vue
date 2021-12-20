@@ -1,6 +1,6 @@
 <template>
   <AddBrand
-     v-show="open"
+    v-show="open"
     :brand="form"
     :updateMode="updateMode"
     @closePopUp="closePopUp"
@@ -10,7 +10,7 @@
   <div className="options">
     <div class="nav" v-on:click="createOpen">Add New Brand</div>
   </div>
-  <ListBrands :brands="brands" @updateOpen="updateOpen"/>
+  <ListBrands :brands="brands" @updateOpen="updateOpen" @deleteBrand="deleteBrand" />
 </template>
 
 <script>
@@ -30,13 +30,12 @@ export default {
       form: {
         ...formModel,
       },
-      updateMode:false
+      updateMode: false,
     };
   },
   components: {
     ListBrands,
-    AddBrand
-    
+    AddBrand,
   },
   async created() {
     this.brands = await this.fetchBrands();
@@ -53,16 +52,12 @@ export default {
     },
     updateOpen(id) {
       this.updateMode = true;
-      // Find the row by id
-      // console.log(this.vehicles)
       if (typeof id !== undefined) {
         let { brands } = this;
         let brand = brands.find((brand) => brand.id === id);
         this.form = brand;
       }
       this.open = !this.open;
-
-      //this.form.title = 35;
     },
     createOpen() {
       this.updateMode = false;
@@ -111,6 +106,26 @@ export default {
       } catch (err) {
         // const errors = await err.json();
         return Promise.reject(err);
+      }
+    },
+    async deleteBrand(id) {
+      if (confirm("Are you sure")) {
+        try {
+          const res = await fetch(`api/brand/${id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json",
+            },
+          });
+          if (res.ok) {
+            alert("Brand sucessfully deleted");
+            window.location.reload();
+          } else {
+            alert("Cound not delete brand");
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
     },
     changeItem(event) {

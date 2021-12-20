@@ -11,7 +11,7 @@
   <div className="options">
     <div class="nav" v-on:click="createOpen">Add New Model</div>
   </div>
-  <ListModels :models="models.models" @updateOpen="updateOpen" />
+  <ListModels :models="models.models" @updateOpen="updateOpen" @deleteModel="deleteModel"/>
 </template>
 
 <script>
@@ -114,6 +114,26 @@ export default {
       } catch (err) {
         // const errors = await err.json();
         return Promise.reject(err);
+      }
+    },
+    async deleteModel(id) {
+      if (confirm("Are you sure")) {
+        try {
+          const res = await fetch(`api/model/${id}`, {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json",
+            },
+          });
+          if (res.ok) {
+            alert("Model sucessfully deleted");
+            window.location.reload();
+          } else {
+            alert("Cound not delete model");
+          }
+        } catch (err) {
+          console.log(err);
+        }
       }
     },
     changeItem(event) {

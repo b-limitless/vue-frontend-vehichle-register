@@ -2,7 +2,11 @@
   <div>
     <div :key="vehicle.id" v-for="vehicle in vehicles">
       <div class="list__cars">
-        <Row :vehicle="vehicle" @updateOpen="$emit('updateOpen', vehicle.id)" />
+        <Row
+          :vehicle="vehicle"
+          @updateOpen="$emit('updateOpen', vehicle.id)"
+          @deleteVehicle="$emit('deleteVehicle', vehicle.id)"
+        />
       </div>
     </div>
   </div>
@@ -23,7 +27,6 @@ export default {
   },
   methods: {
     updateOpen() {
-      alert("He");
       this.$emit("updateOpen");
     },
   },
