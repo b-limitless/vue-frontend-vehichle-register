@@ -28,8 +28,8 @@
     <div className="col actions">
       <div className="price">$ {{ vehicle.price }}</div>
       <button className="btn btn--primary">Book Now</button>
-      <span>Delete </span>
-      <span>Update </span>
+      <span >Delete </span>
+      <span @click="$emit('updateOpen', vehicle.id)">Update </span>
     </div>
   </div>
 </template>
@@ -39,5 +39,7 @@ export default {
   props: {
     vehicle: Object,
   },
+  methods: {
+  }
 };
 </script>

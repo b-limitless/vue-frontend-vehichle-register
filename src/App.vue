@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <Header/>
+    <Header />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import './sass/main.scss';
-import Header from './components/common/header';
+import "./sass/main.scss";
+import Header from "./components/common/header";
 
 export default {
   name: "App",
   components: {
-    Header
+    Header,
   },
 };
 </script>

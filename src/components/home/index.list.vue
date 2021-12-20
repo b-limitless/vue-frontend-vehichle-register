@@ -1,20 +1,15 @@
 <template>
   <div>
-      <AddVehicle v-show="open"/>
-    
-    <div class="options">
-      <div class="nav" v-on:click="updateOpen">Add New Car</div>
-    </div>
     <div :key="vehicle.id" v-for="vehicle in vehicles">
       <div class="list__cars">
-        <Row :vehicle="vehicle" />
+        <Row :vehicle="vehicle" @updateOpen="$emit('updateOpen', vehicle.id)"/>
       </div>
     </div>
   </div>
 </template>
 <script>
 import Row from "./index.row";
-import AddVehicle from "./vehicle.add";
+
 
 export default {
   name: "ListVehicels",
@@ -26,13 +21,12 @@ export default {
   },
   components: {
     Row,
-    AddVehicle
   },
   methods: {
     updateOpen() {
-      this.open = !this.open;
-    },
+      alert('He')
+      this.$emit('updateOpen');
+    }
   },
 };
-
 </script>
