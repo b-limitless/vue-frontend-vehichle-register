@@ -94,7 +94,7 @@ export default {
     brands: Array,
     models: Array,
     updateMode: Boolean,
-    model:Object
+    model: Object,
   },
   methods: {
     onClick(e) {

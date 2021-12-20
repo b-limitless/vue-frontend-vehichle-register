@@ -21,7 +21,9 @@
             <td>{{ model.brandName }}</td>
             <td>
               <button class="btn btn--primary">Delete</button> &nbsp;
-              <button class="btn btn--danger" @click="$emit('updateOpen', model.id)">Update</button>
+              <button class="btn btn--danger" @click="$emit('updateOpen', model.id)">
+                Update
+              </button>
             </td>
           </tr>
         </tbody>
