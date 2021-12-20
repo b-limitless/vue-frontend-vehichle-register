@@ -108,7 +108,7 @@ export default {
       } else {
         url = `api/vehicle`;
         method = "POST";
-        message = "added"
+        message = "added";
       }
       this.errors = {};
       const { form } = this;
