@@ -9,6 +9,7 @@
       :brands="vehicles.brands"
       :vehicle="form"
       :updateMode="updateMode"
+      :errors="errors"
       @updateOpen="updateOpen"
       @changeItem="changeItem($event)"
       @onSubmit="onSubmit"
@@ -61,6 +62,7 @@ export default {
       form: {
         ...formModel,
       },
+      errors: {}
     };
   },
   async created() {
@@ -125,6 +127,7 @@ export default {
         } else {
           const { errors } = data;
           this.errors = errors;
+          console.log(errors)
         }
       } catch (err) {
         return Promise.reject(err);

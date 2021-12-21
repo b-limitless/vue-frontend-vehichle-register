@@ -91,8 +91,10 @@
                 name="persons"
                 :v-model="vehicle.persons"
                 :value="vehicle.persons"
+                v-bind:class="[errors.persons ? 'invalid' : '']"
                 required
               />
+              <span v-if="errors.persons" class="invalid-feedback">{{ errors.persons.join('') }}</span>
             </div>
             <div className="col">
               <label htmlFor="doors">Doors</label>
@@ -229,7 +231,7 @@ export default {
   name: "AddVehicle",
   data() {
     return {
-      errors: {},  
+       
     };
   },
   props: {
@@ -237,7 +239,8 @@ export default {
     brands: Array,
     models: Array,
     vehicle: Object,
-    updateMode: Boolean
+    updateMode: Boolean,
+    errors: Object
   },
   methods: {
     onClick(e) {
