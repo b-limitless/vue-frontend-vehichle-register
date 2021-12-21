@@ -14,8 +14,12 @@
               @change="$emit('changeItem', $event)"
               :v-model="model.name"
               :value="model.name"
+              v-bind:class="[errors.name ? 'invalid' : '']"
               required
             />
+            <span v-if="errors.name" class="invalid-feedback">{{
+                errors.name.join("")
+              }}</span>
           </div>
           <div class="form-group">
             <label htmlFor="seat_count">Seat Count</label>
@@ -27,8 +31,12 @@
               @change="$emit('changeItem', $event)"
               :v-model="model.seat_count"
               :value="model.seat_count"
+              v-bind:class="[errors.seat_count ? 'invalid' : '']"
               required
             />
+            <span v-if="errors.seat_count" class="invalid-feedback">{{
+                errors.seat_count.join("")
+              }}</span>
           </div>
           <div class="f-col">
             <div class="col">
@@ -40,6 +48,7 @@
                 @change="$emit('changeItem', $event)"
                 :v-model="model.brand_id"
                 :value="model.brand_id"
+                v-bind:class="[errors.brand_id ? 'invalid' : '']"
                 required
               >
                 <option value="">Select Brand</option>
@@ -47,6 +56,9 @@
                   {{ brand.name }}
                 </option>
               </select>
+               <span v-if="errors.brand_id" class="invalid-feedback">{{
+                errors.brand_id.join("")
+              }}</span>
             </div>
             <div class="col">
               <label htmlFor="fuel">Fuel</label>
@@ -56,6 +68,7 @@
                 @change="$emit('changeItem', $event)"
                 :v-model="model.fuel"
                 :value="model.fuel"
+                v-bind:class="[errors.fuel ? 'invalid' : '']"
                 required
               >
                 <option value="">Select Fuel Type</option>
@@ -64,6 +77,9 @@
                 <option value="Diesel">Diesel</option>
                 <option value="Hybrid">Hybrid</option>
               </select>
+               <span v-if="errors.fuel" class="invalid-feedback">{{
+                errors.fuel.join("")
+              }}</span>
             </div>
           </div>
           <div class="form-group">
@@ -86,7 +102,7 @@ export default {
   name: "AddModel",
   data() {
     return {
-      errors: {},
+      
     };
   },
   props: {
@@ -95,6 +111,7 @@ export default {
     models: Array,
     updateMode: Boolean,
     model: Object,
+    errors: Object
   },
   methods: {
     onClick(e) {
