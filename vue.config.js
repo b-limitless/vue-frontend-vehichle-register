@@ -5,7 +5,10 @@ module.exports = {
         target: "http://localhost:8000",
         changeOrigin: true,
         logLevel: "debug",
+        ws:false
       },
+      
     },
+    
   },
 };
