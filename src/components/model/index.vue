@@ -14,18 +14,15 @@
   </div>
   <ListModels :models="models.models" @updateOpen="updateOpen" @deleteModel="deleteModel"/>
 </template>
-
 <script>
 import ListModels from "./model.list";
 import AddModel from "./model.add";
-
 const formModel = {
   name: "",
   seat_count: "",
   brand_id: "",
   fuel: "",
 };
-
 export default {
   data() {
     return {
@@ -58,16 +55,12 @@ export default {
     updateOpen(id) {
       this.updateMode = true;
       console.log("need to update", id);
-      // Find the row by id
-      // console.log(this.vehicles)
       if (typeof id !== undefined) {
         let { models } = this.models;
         let model = models.find((vehicle) => vehicle.id === id);
         this.form = model;
       }
       this.open = !this.open;
-
-      //this.form.title = 35;
     },
     createOpen() {
       this.updateMode = false;
@@ -77,14 +70,12 @@ export default {
       this.open = false;
       this.form = formModel;
     },
-
     async onSubmit(id) {
       console.log(id);
       console.log(this.form);
       let url;
       let method;
       let message;
-
       if (id) {
         url = `api/model/${id}`;
         method = "PUT";
@@ -106,7 +97,6 @@ export default {
         });
         const data = await res.json();
         if (res.status === 201 || res.ok) {
-          //this.form = formModel;
           alert(`Model ${message} sucessfully`);
           window.location.reload();
         } else {
@@ -114,7 +104,6 @@ export default {
           this.errors = errors;
         }
       } catch (err) {
-        // const errors = await err.json();
         return Promise.reject(err);
       }
     },

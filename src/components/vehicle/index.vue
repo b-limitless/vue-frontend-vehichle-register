@@ -1,28 +1,26 @@
 <template>
-  <div>
-    <div class="options">
-      <div class="nav" v-on:click="createOpen">Add New Car</div>
-    </div>
-    <AddVehicle
-      v-show="open"
-      :models="vehicles.models"
-      :brands="vehicles.brands"
-      :vehicle="form"
-      :updateMode="updateMode"
-      :errors="errors"
-      @updateOpen="updateOpen"
-      @changeItem="changeItem($event)"
-      @onSubmit="onSubmit"
-      @closePopUp="closePopUp"
-    />
-    <ListVehicles
-      :vehicles="vehicles.vehicles"
-      :models="vehicles.models"
-      :brands="vehicles.brands"
-      @deleteVehicle="deleteVehicle"
-      @updateOpen="updateOpen"
-    />
+  <div class="options">
+    <div class="nav" v-on:click="createOpen">Add New Car</div>
   </div>
+  <AddVehicle
+    v-show="open"
+    :models="vehicles.models"
+    :brands="vehicles.brands"
+    :vehicle="form"
+    :updateMode="updateMode"
+    :errors="errors"
+    @updateOpen="updateOpen"
+    @changeItem="changeItem($event)"
+    @onSubmit="onSubmit"
+    @closePopUp="closePopUp"
+  />
+  <ListVehicles
+    :vehicles="vehicles.vehicles"
+    :models="vehicles.models"
+    :brands="vehicles.brands"
+    @deleteVehicle="deleteVehicle"
+    @updateOpen="updateOpen"
+  />
 </template>
 <script>
 import ListVehicles from "./index.list";
@@ -62,7 +60,7 @@ export default {
       form: {
         ...formModel,
       },
-      errors: {}
+      errors: {},
     };
   },
   async created() {
@@ -127,7 +125,7 @@ export default {
         } else {
           const { errors } = data;
           this.errors = errors;
-          console.log(errors)
+          console.log(errors);
         }
       } catch (err) {
         return Promise.reject(err);

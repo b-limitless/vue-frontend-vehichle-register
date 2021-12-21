@@ -13,15 +13,12 @@
   </div>
   <ListBrands :brands="brands" @updateOpen="updateOpen" @deleteBrand="deleteBrand" />
 </template>
-
 <script>
 import ListBrands from "./brand.list";
 import AddBrand from "./brand.add";
-
 const formModel = {
   name: "",
 };
-
 export default {
   name: "Brand",
   data() {
@@ -32,7 +29,7 @@ export default {
         ...formModel,
       },
       updateMode: false,
-      errors: {}
+      errors: {},
     };
   },
   components: {
@@ -69,14 +66,12 @@ export default {
       this.open = false;
       this.form = formModel;
     },
-
     async onSubmit(id) {
       console.log(id);
       console.log(this.form);
       let url;
       let method;
       let message;
-
       if (id) {
         url = `api/brand/${id}`;
         method = "PUT";
@@ -98,7 +93,6 @@ export default {
         });
         const data = await res.json();
         if (res.status === 201 || res.ok) {
-          //this.form = formModel;
           alert(`Brand ${message} sucessfully`);
           window.location.reload();
         } else {
@@ -106,7 +100,6 @@ export default {
           this.errors = errors;
         }
       } catch (err) {
-        // const errors = await err.json();
         return Promise.reject(err);
       }
     },

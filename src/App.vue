@@ -1,7 +1,8 @@
 <template>
-  <div class="container">
+  <div class="container blur">
     <Header />
     <router-view></router-view>
+    
   </div>
 </template>
 
