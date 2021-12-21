@@ -14,8 +14,13 @@
               :v-model="vehicle.title"
               :value="vehicle.title"
               name="title"
+              v-bind:class="[errors.title ? 'invalid' : '']"
               required
             />
+
+            <span v-if="errors.title" class="invalid-feedback">{{
+              errors.title.join("")
+            }}</span>
           </div>
           <div class="f-col">
             <div class="col">
@@ -27,6 +32,7 @@
                 :v-model="vehicle.brand"
                 :value="vehicle.brand"
                 name="brand"
+                v-bind:class="[errors.brand ? 'invalid' : '']"
                 required
               >
                 <option value="">Please select</option>
@@ -34,6 +40,9 @@
                   {{ brand.name }}
                 </option>
               </select>
+              <span v-if="errors.name" class="invalid-feedback">{{
+                errors.name.join("")
+              }}</span>
             </div>
             <div className="col">
               <label htmlFor="model_id">Models</label>
@@ -44,6 +53,7 @@
                 name="model_id"
                 :v-model="vehicle.model_id"
                 :value="vehicle.model_id"
+                v-bind:class="[errors.model_id ? 'invalid' : '']"
                 required
               >
                 <option value="">Please select</option>
@@ -51,6 +61,9 @@
                   {{ model.name }}
                 </option>
               </select>
+              <span v-if="errors.model_id" class="invalid-feedback">{{
+                errors.model_id.join("")
+              }}</span>
             </div>
           </div>
 
@@ -64,8 +77,12 @@
               name="price"
               :v-model="vehicle.price"
               :value="vehicle.price"
+              v-bind:class="[errors.price ? 'invalid' : '']"
               required
             />
+            <span v-if="errors.price" class="invalid-feedback">{{
+                errors.price.join("")
+              }}</span>
           </div>
           <div className="form-group">
             <label htmlFor="image_url">Image URL</label>
@@ -77,8 +94,12 @@
               name="image_url"
               :v-model="vehicle.image_url"
               :value="vehicle.image_url"
+              v-bind:class="[errors.image_url ? 'invalid' : '']"
               required
             />
+            <span v-if="errors.image_url" class="invalid-feedback">{{
+                errors.image_url.join("")
+              }}</span>
           </div>
           <div className="f-col">
             <div className="col">
@@ -94,7 +115,10 @@
                 v-bind:class="[errors.persons ? 'invalid' : '']"
                 required
               />
-              <span v-if="errors.persons" class="invalid-feedback">{{ errors.persons.join('') }}</span>
+
+              <span v-if="errors.persons" class="invalid-feedback">{{
+                errors.persons.join("")
+              }}</span>
             </div>
             <div className="col">
               <label htmlFor="doors">Doors</label>
@@ -106,8 +130,12 @@
                 name="doors"
                 :v-model="vehicle.doors"
                 :value="vehicle.doors"
+                v-bind:class="[errors.doors ? 'invalid' : '']"
                 required
               />
+              <span v-if="errors.doors" class="invalid-feedback">{{
+                errors.doors.join("")
+              }}</span>
             </div>
             <div className="col">
               <label htmlFor="liters_per_km">Liters per 100 km</label>
@@ -119,8 +147,12 @@
                 name="liters_per_km"
                 :v-model="vehicle.liters_per_km"
                 :value="vehicle.liters_per_km"
+                v-bind:class="[errors.liters_per_km ? 'invalid' : '']"
                 required
               />
+              <span v-if="errors.liters_per_km" class="invalid-feedback">{{
+                errors.liters_per_km.join("")
+              }}</span>
             </div>
           </div>
           <div className="f-col">
@@ -134,8 +166,12 @@
                 name="date_of_registration"
                 :v-model="vehicle.date_of_registration"
                 :value="vehicle.date_of_registration"
+                v-bind:class="[errors.date_of_registration ? 'invalid' : '']"
                 required
               />
+              <span v-if="errors.date_of_registration" class="invalid-feedback">{{
+                errors.date_of_registration.join("")
+              }}</span>
             </div>
             <div className="col">
               <label htmlFor="licence_number">Licence number</label>
@@ -147,8 +183,12 @@
                 name="licence_number"
                 :v-model="vehicle.licence_number"
                 :value="vehicle.licence_number"
+                v-bind:class="[errors.licence_number ? 'invalid' : '']"
                 required
               />
+              <span v-if="errors.licence_number" class="invalid-feedback">{{
+                errors.licence_number.join("")
+              }}</span>
             </div>
           </div>
 
@@ -163,8 +203,12 @@
                 name="mileage"
                 :v-model="vehicle.mileage"
                 :value="vehicle.mileage"
+                v-bind:class="[errors.mileage ? 'invalid' : '']"
                 required
               />
+              <span v-if="errors.mileage" class="invalid-feedback">{{
+                errors.mileage.join("")
+              }}</span>
             </div>
             <div className="col">
               <label htmlFor="licence_number">Production Year</label>
@@ -176,8 +220,12 @@
                 name="production_year"
                 :v-model="vehicle.production_year"
                 :value="vehicle.production_year"
+                v-bind:class="[errors.production_year ? 'invalid' : '']"
                 required
               />
+               <span v-if="errors.production_year" class="invalid-feedback">{{
+                errors.production_year.join("")
+              }}</span>
             </div>
             <div className="col">
               <label htmlFor="veteran">Veteran</label>
@@ -188,12 +236,16 @@
                 name="veteran"
                 :v-model="vehicle.veteran"
                 :value="vehicle.veteran"
+                v-bind:class="[errors.veteran ? 'invalid' : '']"
                 required
               >
                 <option value="">Please Select</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
+              <span v-if="errors.veteran" class="invalid-feedback">{{
+                errors.veteran.join("")
+              }}</span>
             </div>
           </div>
           <div className="form-group">
@@ -207,8 +259,12 @@
               placeholder="Description"
               :v-model="vehicle.description"
               :value="vehicle.description"
+              v-bind:class="[errors.description ? 'invalid' : '']"
               required
             ></textarea>
+            <span v-if="errors.description" class="invalid-feedback">{{
+                errors.description.join("")
+              }}</span>
           </div>
 
           <div class="form-group">
@@ -217,7 +273,7 @@
               <button type="submit" class="btn btn--primary">
                 <span v-if="updateMode">Update</span>
                 <span v-else>Submit</span>
-                </button>
+              </button>
             </div>
           </div>
         </form>
@@ -230,9 +286,7 @@
 export default {
   name: "AddVehicle",
   data() {
-    return {
-       
-    };
+    return {};
   },
   props: {
     open: Boolean,
@@ -240,7 +294,7 @@ export default {
     models: Array,
     vehicle: Object,
     updateMode: Boolean,
-    errors: Object
+    errors: Object,
   },
   methods: {
     onClick(e) {
