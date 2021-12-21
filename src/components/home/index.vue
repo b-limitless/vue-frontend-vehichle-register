@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="options">
-      <div class="nav" v-on:click="createOpen">Add New Car</div>
+      <div class="nav" v-on:click="createOpen">Add New Car +</div>
     </div>
     <AddVehicle
       v-show="open"
