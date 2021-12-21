@@ -3,6 +3,7 @@
     v-show="open"
     :brand="form"
     :updateMode="updateMode"
+    :errors="errors"
     @closePopUp="closePopUp"
     @onSubmit="onSubmit"
     @changeItem="changeItem"
@@ -31,6 +32,7 @@ export default {
         ...formModel,
       },
       updateMode: false,
+      errors: {}
     };
   },
   components: {

@@ -14,10 +14,14 @@
               @change="$emit('changeItem', $event)"
               :v-model="brand.name"
               :value="brand.name"
+              v-bind:class="[errors.name ? 'invalid' : '']"
               required
             />
+            <span v-if="errors.name" class="invalid-feedback">{{
+              errors.name.join("")
+            }}</span>
           </div>
-          
+
           <div class="form-group">
             <div class="actions-btn">
               <button class="btn btn--secoundary" v-on:click="onClick">Cancel</button>
@@ -36,16 +40,12 @@
 <script>
 export default {
   name: "AddModel",
-  data() {
-    return {
-      errors: {},
-    };
-  },
   props: {
     open: Boolean,
-    brand:Object,
+    brand: Object,
     updateMode: Boolean,
-    model:Object
+    model: Object,
+    errors: Object,
   },
   methods: {
     onClick(e) {
