@@ -64,7 +64,7 @@ export default {
     };
   },
   async created() {
-    this.vehicles = await this.fetchVehicles();
+    this.vehicles = await this.fetchVehicles() || [];
   },
   methods: {
     async fetchVehicles() {
@@ -73,8 +73,7 @@ export default {
         const data = await res.json();
         return data;
       } catch (err) {
-        const getEr = getError(err);
-        console.log("http request", getEr);
+        console.log("http request", getError(err));
       }
     },
     updateOpen(id) {
